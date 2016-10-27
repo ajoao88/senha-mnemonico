@@ -45,6 +45,7 @@ Frase.prototype.validar = function() {
         posicao = 0;
 
     if (frase.split(' ').length < 4) {
+        alert('Digite uma frase com no mínimo 4 palavras');
         return false;
     }
 
