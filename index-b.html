@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Crie sua senha com o mnemônico de uma frase</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+</head>
+
+<body class="container">
+    <header>
+        <hgroup>
+            <div class="page-header">
+                <h2>Geração de <span class="label label-danger">senha</span> com mnemônico de frase</h2>
+            </div>
+        </hgroup>
+    </header>
+    <section>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="txtFrase" class="control-label">Digite sua frase:</label>
+                <input type="text" id="txtFrase" name="frase" class="form-control input-sm" maxlength="150" size="150" placeholder="Digite uma frase que não seja comum a outras pessoas" required="true" autofocus />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <button type="button" id="btnGerarSenha" class="btn btn-success">Gerar Senha</button>
+                <button type="button" id="btnLimpar" class="btn btn-warning">Limpar campos</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label id="lblQtdPalavras" class="control-label"></label>
+                <span>            </span>
+                <label id="lblQtdLetras"></label>
+            </div>
+            <!--<label id="lblQtdPalavras"></label>-->
+        </div>
+        <!--<div class="row">
+            <div class="form-group col-md-2">
+                <label for="txtSenha" class="control-label">Senha</label>
+                <input type="text" id="txtSenha" name="senha" class="form-control input-sm" />
+            </div>
+        </div>-->
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="txtSenha" class="control-label">Senha</label>
+                <div class="input-group input-group-lg">
+                    <input type="password" id="txtSenha" class="form-control" placeholder="Senha gerada">
+                    <span class="input-group-addon"><span id="icoVerSenha" class="glyphicon glyphicon-eye-open"></span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+    </footer>
+    <script src="js/frase.js"></script>
+    <script src="js/gerador-senha.js"></script>
+</body>
+
+</html>
