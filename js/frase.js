@@ -15,6 +15,9 @@ Frase.prototype.removerEspacosDuplicados = function() {
     return frase;
 }
 
+/**
+ * 
+ */
 Frase.prototype.limpar = function() {
     let frase = this.frase;
     let mapaHexAcentos = {
@@ -71,7 +74,7 @@ Frase.prototype.validar = function() {
 
 Frase.prototype.converter = function() {
     let letrasASubstituir = [/a/i, /e/i, /i/i, /o/i, /t/i];
-    let simbolosSubstitutos = ['@', '&', '!', '*', ''];
+    let simbolosSubstitutos = ['@', '&', '!', '*', '+'];
     let numerosSubstitutos = [4, 3, 1, 0, 7];
 
     let substituidoPorSimbolo = false,
@@ -86,33 +89,41 @@ Frase.prototype.converter = function() {
 
     let chars = senha.split('');
     let i = 0;
+    i = escolherIndiceAleatorio(simbolosSubstitutos.join(''), simbolosSubstitutos.length - 1, /./);
+
     //Leetificação e conversão de case de algumas letras
     //for (var i = 0; i < letrasASubstituir.length; i++) {
-    while (i < letrasASubstituir.length && (!substituidoPorSimbolo || !substituidoPorNumero)) {
+    while (!substituidoPorSimbolo || !substituidoPorNumero) {
         if (!substituidoPorSimbolo &&
             simbolosSubstitutos[i] && senha.search(letrasASubstituir[i]) >= 0) {
             senha = senha.replace(letrasASubstituir[i], simbolosSubstitutos[i]);
             substituidoPorSimbolo = true;
+            // console.log('Símbolo: ' + letrasASubstituir[i] + ' por: ' + simbolosSubstitutos[i] +
+            //     ' em: ' + i);
         }
 
-        if (!substituidoPorNumero && numerosSubstitutos[i] &&
+        if (!substituidoPorNumero &&
             senha.search(letrasASubstituir[i]) >= 0) {
             senha = senha.replace(letrasASubstituir[i], numerosSubstitutos[i]);
             substituidoPorNumero = true;
+            // console.log('Número: ' + letrasASubstituir[i] + ' por: ' + numerosSubstitutos[i] +
+            //     ' em: ' + i);
         }
-        i++;
+        i = escolherIndiceAleatorio(simbolosSubstitutos.join(''), simbolosSubstitutos.length - 1, /./)
     }
-    let pos = parseInt(senha.length) - parseInt((Math.random() * 10).toFixed());
-    pos = parseFloat(pos);
-    if (pos >= senha.length) {
-        pos = senha.length - 2;
-    } else if (pos <= 0) {
-        pos = 1;
-    }
+    // let pos = parseInt(senha.length) - parseInt((Math.random() * 10).toFixed());
+    // pos = parseFloat(pos);
+    // if (pos >= senha.length) {
+    //     pos = senha.length - 2;
+    // } else if (pos <= 0) {
+    //     pos = 1;
+    // }
 
-    while (!/[a-zA-Z]/.test(senha[pos])) {
-        pos++;
-    }
+    // while (!/[a-zA-Z]/.test(senha[pos])) {
+    //     pos++;
+    // }
+    let pos = escolherIndiceAleatorio(senha, senha.length - 1, /[a-zA-Z]/);
+
     senha = senha.substring(0, (pos <= 1) ? 1 : pos) + senha[pos].toLowerCase() + senha.substr(pos + 1)
     pos = parseInt(senha.length) - pos;
     while (!/[a-zA-Z]/.test(senha[pos])) {

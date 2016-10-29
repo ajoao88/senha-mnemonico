@@ -1,3 +1,31 @@
+/**
+ * Função que localiza aletóriamente o índice de uma vogal dentro de uma string
+ * @param {string} texto
+ * @return {int}   pos
+ */
+function escolherIndiceAleatorio(texto, limite, regExp) {
+    let pos = parseInt(texto.length) - parseInt((Math.random() * 10).toFixed());
+    if (pos < 0) pos *= (-1);
+    while (pos > limite || pos > texto.length ||
+        !regExp.test(texto[pos])) {
+
+        pos = parseInt(texto.length) - parseInt((Math.random() * 10).toFixed());
+        if (pos < 0) pos *= (-1);
+    }
+
+
+    // if (pos >= texto.length) {
+    //     pos = texto.length - 2;
+    // } else if (pos <= 0) {
+    //     pos = 1;
+    // }
+
+    // while (!/[a-zA-Z]/.test(texto[pos])) {
+    //     pos++;
+    // }
+    return pos;
+}
+
 document.querySelector('#txtFrase').addEventListener('keyup', (ev) => {
     let txtFrase = ev.target;
     let valor = txtFrase.value.trim();
