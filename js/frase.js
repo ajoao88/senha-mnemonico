@@ -89,7 +89,7 @@ Frase.prototype.converter = function() {
 
     let chars = senha.split('');
     let i = 0;
-    i = escolherIndiceAleatorio(simbolosSubstitutos.join(''), simbolosSubstitutos.length - 1, /./);
+    i = escolherIndiceAleatorio(simbolosSubstitutos.join(''), /./);
 
     //Leetificação e conversão de case de algumas letras
     //for (var i = 0; i < letrasASubstituir.length; i++) {
@@ -109,7 +109,7 @@ Frase.prototype.converter = function() {
             // console.log('Número: ' + letrasASubstituir[i] + ' por: ' + numerosSubstitutos[i] +
             //     ' em: ' + i);
         }
-        i = escolherIndiceAleatorio(simbolosSubstitutos.join(''), simbolosSubstitutos.length - 1, /./)
+        i = escolherIndiceAleatorio(simbolosSubstitutos.join(''), /./)
     }
     // let pos = parseInt(senha.length) - parseInt((Math.random() * 10).toFixed());
     // pos = parseFloat(pos);
@@ -122,7 +122,7 @@ Frase.prototype.converter = function() {
     // while (!/[a-zA-Z]/.test(senha[pos])) {
     //     pos++;
     // }
-    let pos = escolherIndiceAleatorio(senha, senha.length - 1, /[a-zA-Z]/);
+    let pos = escolherIndiceAleatorio(senha, /[a-zA-Z]/);
 
     senha = senha.substring(0, (pos <= 1) ? 1 : pos) + senha[pos].toLowerCase() + senha.substr(pos + 1)
     pos = parseInt(senha.length) - pos;

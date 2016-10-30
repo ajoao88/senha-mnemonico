@@ -1,12 +1,13 @@
 /**
  * Função que localiza aletóriamente o índice de uma vogal dentro de uma string
- * @param {string} texto
- * @return {int}   pos
+ * @param {string} texto    Texto onde será procurado um caracter aleatório de acordo com a regExp
+ * @param {regExp} regExp   Expressão regular para escolher um caracter de acordo com o critério desejado
+ * @return {int}   pos      Índice do caracter
  */
-function escolherIndiceAleatorio(texto, limite, regExp) {
+function escolherIndiceAleatorio(texto, regExp) {
     let pos = parseInt(texto.length) - parseInt((Math.random() * 10).toFixed());
     if (pos < 0) pos *= (-1);
-    while (pos > limite || pos > texto.length ||
+    while (pos > texto.length || pos > texto.length ||
         !regExp.test(texto[pos])) {
 
         pos = parseInt(texto.length) - parseInt((Math.random() * 10).toFixed());
