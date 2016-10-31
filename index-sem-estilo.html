@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Sugestão de senha a partir de mnemonico de frase</title>
+</head>
+
+<body>
+    <header>
+        <h1>Digite uma frase e receba uma sugestão de senha</h1>
+    </header>
+    <section>
+        <div>
+            <label for="txtFrase">Digite sua frase:</label>
+        </div>
+        <div>
+            <input type="text" id="txtFrase" name="frase" maxlength="150" size="150" placeholder="Digite uma frase que não seja comum a outras pessoas" required="true" autofocus />
+        </div>
+        <div>
+            <button type="button" id="btnGerarSenha">Gerar Senha</button>
+            <button type="button" id="btnLimpar">Limpar campos</button>
+        </div>
+        <div>
+            <label id="lblQtdPalavras"></label>
+            <span>            </span>
+            <label id="lblQtdLetras"></label>
+            <!--<label id="lblQtdPalavras"></label>-->
+        </div>
+        <div>
+            <label for="txtSenha">Senha</label>
+        </div>
+        <div>
+            <input type="text" id="txtSenha" name="senha" />
+        </div>
+    </section>
+    <footer>
+    </footer>
+    <script src="js/frase.js"></script>
+    <script src="js/gerador-senha.js"></script>
+</body>
+
+</html>
