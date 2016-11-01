@@ -15,20 +15,17 @@ Frase.prototype.removerEspacosDuplicados = function() {
     return frase;
 }
 
-/**
- * 
- */
 Frase.prototype.limpar = function() {
-    let frase = this.frase;
-    let mapaHexAcentos = {
-        a: /[\xE0-\xE6]/g,
-        e: /[\xE8-\xEB]/g,
-        i: /[\xEC-\xEF]/g,
-        o: /[\xF2-\xF6]/g,
-        u: /[\xF9-\xFC]/g,
-        c: /\xE7/g,
-        n: /\xF1/g
-    };
+    let frase = this.frase,
+        mapaHexAcentos = {
+            a: /[\xE0-\xE6]/g,
+            e: /[\xE8-\xEB]/g,
+            i: /[\xEC-\xEF]/g,
+            o: /[\xF2-\xF6]/g,
+            u: /[\xF9-\xFC]/g,
+            c: /\xE7/g,
+            n: /\xF1/g
+        };
 
     frase = this.removerEspacosDuplicados();
 
@@ -37,14 +34,14 @@ Frase.prototype.limpar = function() {
     }
     frase = frase.replace(/ /g, ' ');
     frase = frase.replace(/[^\w ]/g, '');
-    return frase;
 
+    return frase;
 }
 
 Frase.prototype.validar = function() {
-    let frase = this.frase;
-    let palavras = this.extrairPalavras();
-    let cont = 0,
+    let frase = this.frase,
+        palavras = this.extrairPalavras(),
+        cont = 0,
         posicao = 0;
 
     if (frase.split(' ').length < 4) {
@@ -56,6 +53,7 @@ Frase.prototype.validar = function() {
     for (var palavra in palavras) {
         let prefixo = palavras[palavra].substr(0, 2);
         cont = 0;
+
         for (var i = 0; i < palavras.length; i++) {
             cont += prefixo == palavras[i].substr(0, 2) ? 1 : 0;
         }
@@ -73,15 +71,13 @@ Frase.prototype.validar = function() {
 }
 
 Frase.prototype.converter = function() {
-    let letrasASubstituir = [/a/i, /e/i, /i/i, /o/i, /t/i];
-    let simbolosSubstitutos = ['@', '&', '!', '*', '+'];
-    let numerosSubstitutos = [4, 3, 1, 0, 7];
-
-    let substituidoPorSimbolo = false,
-        substituidoPorNumero = false;
-
-    let frase = this.frase;
-    let senha = '';
+    let letrasASubstituir = [/a/i, /e/i, /i/i, /o/i, /t/i],
+        simbolosSubstitutos = ['@', '&', '!', '*', '+'],
+        numerosSubstitutos = [4, 3, 1, 0, 7],
+        substituidoPorSimbolo = false,
+        substituidoPorNumero = false,
+        frase = this.frase,
+        senha = '';
 
     frase.split(' ').forEach(function(palavra) {
         senha += palavra.substr(0, 2);
@@ -92,44 +88,29 @@ Frase.prototype.converter = function() {
     i = escolherIndiceAleatorio(simbolosSubstitutos.join(''), /./);
 
     //Leetificação e conversão de case de algumas letras
-    //for (var i = 0; i < letrasASubstituir.length; i++) {
     while (!substituidoPorSimbolo || !substituidoPorNumero) {
         if (!substituidoPorSimbolo &&
             simbolosSubstitutos[i] && senha.search(letrasASubstituir[i]) >= 0) {
             senha = senha.replace(letrasASubstituir[i], simbolosSubstitutos[i]);
             substituidoPorSimbolo = true;
-            // console.log('Símbolo: ' + letrasASubstituir[i] + ' por: ' + simbolosSubstitutos[i] +
-            //     ' em: ' + i);
         }
 
         if (!substituidoPorNumero &&
             senha.search(letrasASubstituir[i]) >= 0) {
             senha = senha.replace(letrasASubstituir[i], numerosSubstitutos[i]);
             substituidoPorNumero = true;
-            // console.log('Número: ' + letrasASubstituir[i] + ' por: ' + numerosSubstitutos[i] +
-            //     ' em: ' + i);
         }
         i = escolherIndiceAleatorio(simbolosSubstitutos.join(''), /./)
     }
-    // let pos = parseInt(senha.length) - parseInt((Math.random() * 10).toFixed());
-    // pos = parseFloat(pos);
-    // if (pos >= senha.length) {
-    //     pos = senha.length - 2;
-    // } else if (pos <= 0) {
-    //     pos = 1;
-    // }
 
-    // while (!/[a-zA-Z]/.test(senha[pos])) {
-    //     pos++;
-    // }
     let pos = escolherIndiceAleatorio(senha, /[a-zA-Z]/);
-
+    //Troca de case de algumas letras
     senha = senha.substring(0, (pos <= 1) ? 1 : pos) + senha[pos].toLowerCase() + senha.substr(pos + 1)
     pos = parseInt(senha.length) - pos;
     while (!/[a-zA-Z]/.test(senha[pos])) {
         pos++;
     }
-    senha = senha.substring(0, (pos <= 1) ? 1 : pos) + senha[pos].toUpperCase() + senha.substr(pos + 1)
-        //Troca de case de algumas letras
+    senha = senha.substring(0, (pos <= 1) ? 1 : pos) + senha[pos].toUpperCase() + senha.substr(pos + 1);
+
     return senha;
 }

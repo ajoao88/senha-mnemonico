@@ -1,8 +1,8 @@
 /**
  * Função que localiza aletóriamente o índice de uma vogal dentro de uma string
- * @param {string} texto    Texto onde será procurado um caracter aleatório de acordo com a regExp
- * @param {regExp} regExp   Expressão regular para escolher um caracter de acordo com o critério desejado
- * @return {int}   pos      Índice do caracter
+ * @param       {string} texto    Texto onde será procurado um caracter aleatório de acordo com a regExp
+ * @param       {regExp} regExp   Expressão regular para escolher um caracter de acordo com o critério desejado
+ * @return      {int}    pos      Índice do caracter
  */
 function escolherIndiceAleatorio(texto, regExp) {
     let pos = parseInt(texto.length) - parseInt((Math.random() * 10).toFixed());
@@ -14,28 +14,15 @@ function escolherIndiceAleatorio(texto, regExp) {
         if (pos < 0) pos *= (-1);
     }
 
-
-    // if (pos >= texto.length) {
-    //     pos = texto.length - 2;
-    // } else if (pos <= 0) {
-    //     pos = 1;
-    // }
-
-    // while (!/[a-zA-Z]/.test(texto[pos])) {
-    //     pos++;
-    // }
     return pos;
 }
 
 document.querySelector('#txtFrase').addEventListener('keyup', (ev) => {
-    let txtFrase = ev.target;
-    let valor = txtFrase.value.trim();
-
-
-    //console.log('Valor atual(keypress): ' + valor);
-
-    let lblQtdLetras = document.getElementById('lblQtdLetras');
-    let lblQtdPalavras = document.getElementById('lblQtdPalavras');
+    let txtFrase = ev.target
+        ,valor = txtFrase.value.trim()
+        ,lblQtdLetras = document.getElementById('lblQtdLetras')
+        ,lblQtdPalavras = document.getElementById('lblQtdPalavras');
+        
     if (valor) {
         if (lblQtdLetras) {
             lblQtdLetras.innerHTML = 'Quantidade de letras: ' + valor.match(/[^ ]/g).length;
@@ -49,8 +36,6 @@ document.querySelector('#txtFrase').addEventListener('keyup', (ev) => {
     } else {
         lblQtdLetras.innerHTML = '';
     }
-
-
 });
 
 document.querySelector('#btnGerarSenha').addEventListener('click', (ev) => {
